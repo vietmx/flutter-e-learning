@@ -1,7 +1,7 @@
-import 'package:elearning/auth/google_auth.dart';
+// import 'package:elearning/auth/google_auth.dart';
 
-var gAuth = GoogleAuth();
+// var gAuth = GoogleAuth();
 
-// var updateAvailable = false;
-// var versionInfo = {};
-// var noNewNotification = false;
+// // var updateAvailable = false;
+// // var versionInfo = {};
+// // var noNewNotification = false;

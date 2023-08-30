@@ -1,5 +1,5 @@
 import 'package:elearning/theme/box_icons_icons.dart';
-import 'package:elearning/ui/pages/navmenu/menu_dashboard_layout.dart';
+import 'package:elearning/ui/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 
 class Onboarding extends StatefulWidget {
@@ -92,7 +92,7 @@ class _OnboardingState extends State<Onboarding> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "Sign in with Google ➡",
+                    "Login in ➡",
                     style: TextStyle(
                         fontFamily: 'Red Hat Display',
                         fontSize: 16,
@@ -105,7 +105,7 @@ class _OnboardingState extends State<Onboarding> {
                 Navigator.pushReplacement(
                     context,
                     CupertinoPageRoute(
-                        builder: (context) => MenuDashboardLayout()));
+                        builder: (context) => LoginPage()));
               })
         ],
       ),

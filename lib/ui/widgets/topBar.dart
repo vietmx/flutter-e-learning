@@ -10,11 +10,13 @@ class TopBar extends StatefulWidget {
     required this.controller,
     required this.expanded,
     required this.onMenuTap,
+    required this.userName, // Add this parameter
   }) : super(key: key);
 
   final TextEditingController controller;
   final bool expanded;
   final onMenuTap;
+  final String userName; // Define the user's name parameter
 
   @override
   _TopBarState createState() => _TopBarState();
@@ -28,7 +30,7 @@ class _TopBarState extends State<TopBar> {
       color: CupertinoColors.white,
       width: MediaQuery.of(context).size.width,
       height: widget.expanded
-          ? MediaQuery.of(context).size.height * 0.35
+          ? MediaQuery.of(context).size.height * 0.36
           : MediaQuery.of(context).size.height * 0.19,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -42,7 +44,7 @@ class _TopBarState extends State<TopBar> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Hi, Akshay.",
+                   "Hi, ${widget.userName}.", // Display the user's name here
                     style: TextStyle(
                         color: Color(0xFF343434),
                         fontSize: 24,
@@ -84,7 +86,7 @@ class _TopBarState extends State<TopBar> {
               controller: widget.controller,
               expands: false,
               inputFormatters: [
-                BlacklistingTextInputFormatter.singleLineFormatter
+                FilteringTextInputFormatter.singleLineFormatter
               ],
               keyboardType: TextInputType.text,
               suffix: Padding(
