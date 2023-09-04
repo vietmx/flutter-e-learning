@@ -1,3 +1,4 @@
+import 'package:elearning/services/user_details_api_client.dart';
 import 'package:elearning/theme/config.dart' as config;
 import 'package:elearning/ui/widgets/card.dart';
 import 'package:elearning/ui/widgets/sectionHeader.dart';
@@ -11,10 +12,12 @@ class PlannerPage extends StatelessWidget {
   PlannerPage({
     Key? key,
     required this.onMenuTap,
+    required this.user
   }) : super(key: key);
   final Function? onMenuTap;
+  final User user;
 
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -84,6 +87,7 @@ class PlannerPage extends StatelessWidget {
               controller: controller,
               expanded: false,
               onMenuTap: onMenuTap,
+               userName: user.name, // Use user.name directly here
             ),
           )
         ],

@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:elearning/services/user_details_api_client.dart';
 import 'package:elearning/ui/widgets/overlay.dart';
 import 'package:elearning/theme/box_icons_icons.dart';
 import 'package:elearning/theme/config.dart';
@@ -13,7 +13,8 @@ import 'package:flutter/material.dart' as material;
 
 class Home extends StatefulWidget {
   final onMenuTap;
-  Home({this.onMenuTap});
+  final User user; // Received user details
+  Home({required this.onMenuTap, required this.user});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -48,26 +49,28 @@ class _HomeState extends State<Home> {
             items: [
               BottomNavigationBarItem(
                   icon: Icon(BoxIcons.bx_home_circle),
-                  title: tabNo == 0 ? Text("Home") : Container()),
+                  label: tabNo == 0 ? "Home" : null),
               BottomNavigationBarItem(
                   icon: Icon(BoxIcons.bx_calendar),
-                  title: tabNo == 1 ? Text("Planner") : Container()),
+                  label: tabNo == 1 ? "Planner" : null),
               BottomNavigationBarItem(icon: Container()),
               BottomNavigationBarItem(
                   icon: Icon(BoxIcons.bxs_videos),
-                  title: tabNo == 3 ? Text("Videos") : Container()),
+                  label: tabNo == 3 ? "Videos" : null),
               BottomNavigationBarItem(
                   icon: Icon(BoxIcons.bx_stats),
-                  title: tabNo == 4 ? Text("Leaderboard") : Container()),
+                  label: tabNo == 4 ? "Leaderboard" : null),
             ],
           ),
           tabBuilder: (context, index) => (index == 0)
               ? HomePage(
                   onMenuTap: widget.onMenuTap,
+                  user: widget.user, // Pass the user object
                 )
               : (index == 1)
                   ? PlannerPage(
                       onMenuTap: widget.onMenuTap,
+                      user: widget.user, // Pass the user object
                     )
                   : (index == 2)
                       ? Container(
@@ -76,9 +79,11 @@ class _HomeState extends State<Home> {
                       : (index == 3)
                           ? VideosPage(
                               onMenuTap: widget.onMenuTap,
+                              user: widget.user, // Pass the user object
                             )
                           : LeaderboardPage(
                               onMenuTap: widget.onMenuTap,
+                              user: widget.user, // Pass the user object
                             ),
         ),
         Positioned(
@@ -131,75 +136,84 @@ class _HomeState extends State<Home> {
 
 class HomePage extends StatelessWidget {
   final onMenuTap;
+   final User user; // Receive the user object
   HomePage({
     Key? key,
     required this.onMenuTap,
+    required this.user
   }) : super(key: key);
 
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return CupertinoPageScaffold(
       backgroundColor: Colors().secondColor(1),
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          SafeArea(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverFixedExtentList(
+      child: SafeArea(
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            SafeArea(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverFixedExtentList(
                     delegate: SliverChildListDelegate.fixed([Container()]),
-                    itemExtent: MediaQuery.of(context).size.height * 0.32),
-                SliverToBoxAdapter(
-                  child: SectionHeader(
-                    text: 'Recommended Lectures',
-                    onPressed: () {},
+                    itemExtent: screenHeight * 0.36,
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 245,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return VideoCard(long: false);
-                      },
+                  SliverToBoxAdapter(
+                    child: SectionHeader(
+                      text: 'Recommended Lectures',
+                      onPressed: () {},
                     ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SectionHeader(
-                    text: 'Revision Lectures',
-                    onPressed: () {},
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 245,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return VideoCard(long: false);
-                      },
+                  SliverToBoxAdapter(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 245,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 1,
+                        itemBuilder: (context, index) {
+                          return VideoCard(long: false);
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  SliverToBoxAdapter(
+                    child: SectionHeader(
+                      text: 'Revision Lectures',
+                      onPressed: () {},
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 245,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 4,
+                        itemBuilder: (context, index) {
+                          return VideoCard(long: false);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            child: TopBar(
-              controller: controller,
-              expanded: true,
-              onMenuTap: onMenuTap,
+            Positioned(
+              top: 0,
+              child: TopBar(
+                controller: controller,
+                expanded: true,
+                onMenuTap: onMenuTap,
+                userName: user.name, // Provide the user's name here
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

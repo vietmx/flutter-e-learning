@@ -39,9 +39,9 @@ class Colors {
   Color _mainColor = Color(0xFFFFFFFF);
   Color _secondColor = Color(0xFFF5F6FC);
   Color _accentColor = Color(0xFF03A9F4);
-  // Color _mainDarkColor = Color(0xFF181818);
-  // Color _secondDarkColor = Color(0xFF2F2F2F);
-  // Color _accentDarkColor = Color(0xFFF0F0F0);
+  Color _mainDarkColor = Color(0xFF181818);
+  Color _secondDarkColor = Color(0xFF2F2F2F);
+  Color _accentDarkColor = Color(0xFFF0F0F0);
 
   LinearGradient waves = LinearGradient(
     colors: [Color(0xFF0396FF), Color(0xFFABDCFF)],
@@ -116,15 +116,15 @@ class Colors {
     return this._accentColor.withOpacity(opacity);
   }
 
-  // Color mainDarkColor(double opacity) {
-  //   return this._mainDarkColor.withOpacity(opacity);
-  // }
+  Color mainDarkColor(double opacity) {
+    return this._mainDarkColor.withOpacity(opacity);
+  }
 
-  // Color secondDarkColor(double opacity) {
-  //   return this._secondDarkColor.withOpacity(opacity);
-  // }
+  Color secondDarkColor(double opacity) {
+    return this._secondDarkColor.withOpacity(opacity);
+  }
 
-  // Color accentDarkColor(double opacity) {
-  //   return this._accentDarkColor.withOpacity(opacity);
-  // }
+  Color accentDarkColor(double opacity) {
+    return this._accentDarkColor.withOpacity(opacity);
+  }
 }

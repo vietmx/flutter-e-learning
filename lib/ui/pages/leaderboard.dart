@@ -1,3 +1,4 @@
+import 'package:elearning/services/user_details_api_client.dart';
 import 'package:elearning/theme/config.dart' as config;
 import 'package:elearning/ui/widgets/card.dart';
 import 'package:elearning/ui/widgets/sectionHeader.dart';
@@ -10,9 +11,10 @@ class LeaderboardPage extends StatefulWidget {
   LeaderboardPage({
     Key? key,
     required this.onMenuTap,
+    required this.user
   }) : super(key: key);
   final Function? onMenuTap;
-
+  final User user;
   @override
   _LeaderboardPageState createState() => _LeaderboardPageState();
 }
@@ -326,6 +328,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
                       controller: controller,
                       expanded: false,
                       onMenuTap: widget.onMenuTap,
+                       userName: widget.user.name, // Use user.name directly here
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,

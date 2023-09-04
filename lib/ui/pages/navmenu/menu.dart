@@ -1,3 +1,4 @@
+import 'package:elearning/services/api_service.dart';
 import 'package:elearning/theme/box_icons_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -275,6 +276,34 @@ class Menu extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.normal,
                             fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(flex: 2),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: Icon(
+                            BoxIcons.bx_log_out,
+                            color: Colors.white,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            handleLogOut(context); // Call the log out handler
+                          },
+                          child: Text(
+                            "Log Out",
+                            maxLines: 1,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                              fontFamily: "Red Hat Display",
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ],
